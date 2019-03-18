@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="body">
+        <form>
+            <div class="form-group">
+                <label for="inputID">ID</label>
+                <input type="text" class="form-control" id="inputID" placeholder="Enter ID">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder="Enter Password">
+            </div>
+            <div class="form-group">
+                <label for="inputName">Name</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Enter Name">
+            </div>
+
+            <div class="form-group">
+                <label for="inputMail">E-Mail</label>
+                <input type="mail" class="form-control" id="inputMail" placeholder="Enter EMail">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" class="form-control address" id="inputAddress" placeholder="Enter Address" readonly>
+            </div>
+            <div class="form-group">
+                <label for="inputZipCode" class="address">ZipCode</label>
+                <input type="text" class="form-control address" id="inputZipCode" placeholder="Enter ZipCode" readonly>
+            </div>
+            <button type="button" class="btn btn-primary" id="submit">Submit</button>
+        </form>
+
+        <div class="print">
+
+        </div>
+        <!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
+
+    </div>
+
+    <!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script>
+        $(function () {
+            $('.address').click(function (e) {
+                e.preventDefault();
+                new daum.Postcode({
+                    oncomplete: function (data) {
+                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                        // 예제를 참고하여 다양한 활용법을 확인해 보세요.                                                
+                        console.log(data);
+                        $('#inputAddress').val(data.address);
+                        $('#inputZipCode').val(data.zonecode);
+                    }
+                }).open();
+            });
+            $('#submit').click(function () {
+                if (validation())
+                    print();
+
+
+            });
+        });
+        function validation() {
+            var id = /^[a-z0-9]{4,12}$/;
+            var pw = /^[A-Za-z0-9]{8,12}$/;
+            var name = /^[가-힣]{2,6}$/;
+            var mail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+            var address;
+            var zipcode = /^[0-9]{5}$/;
+
+            if (!id.test($('#inputID').val())) {
+                alert("이름을 확인해주세요. 이름은 영문, 숫자 조합으로 4~12자리입니다.");
+                return false;
+            }
+            else if (!pw.test($('#inputPassword').val())) {
+                alert("패스워드를 확인해주세요. 패스워드는 영문, 숫자 조합으로 8~12자리입니다.");
+                return false;
+            }
+            else if (!name.test($('#inputName').val())) {
+                alert("이름을 확인해주세요. 이름은 한글만 입력가능합니다.");
+                return false;
+            }
+            else if (!mail.test($('#inputMail').val())) {
+                alert("메일주소를 확인해주세요.");
+                return false;
+            }
+
+            else if ($('#inputAddress').val() == "") {
+                alert("주소를 확인해주세요.");
+                return false;
+            }
+            else if ($('#inputZipCode').val() == "") {
+                alert("우편번호를 확인해주세요.");
+                return false;
+            }
+
+            else return true;
+        }
+        function print() {
+            var printString =
+                $('#inputID').val() + " " +
+                $('#inputPassword').val() + " " +
+                $('#inputName').val() + " " +
+                $('#inputAddress').val() + " " +
+                $('#inputZipCode').val();
+            $('.print').append(printString);
+
+            $('form').each(function () {
+                this.reset();
+            });
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

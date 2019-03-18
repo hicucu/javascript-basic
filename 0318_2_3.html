@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        /*
+                position
+
+                static
+                relative - 상대적 위치
+                absolute - 정대적 위치
+                fixed - 뷰 포트 안에서 절대적 위치
+                float - ex 백과사전 사진
+
+                슬라이드 햄버거 좌측
+                풀다운메뉴 - 전체
+                각각에 메뉴
+                */
+
+        .content {
+            margin-top: 50px;
+            display: inline-block;
+            height: 200px;
+            width: 200px;
+        }
+
+        .header {
+            position: fixed;
+        }
+
+        .menu-icon {
+            height: 50px;
+            width: 50px;
+            left: 50px;
+            top: 50px;
+            background: #666;
+            text-align: center;
+            position: fixed;
+        }
+
+        .menu-list {
+            width: 0%;
+            top:50px;
+            display: block;
+            background: #666;
+            border: 1px solid black;
+            position: fixed;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="menu">
+                <div class="menu-icon">
+                    <div>메뉴</div>
+                </div>
+                <div class="menu-list">
+                    <h2>
+                        <li>
+                            <ol>menu1</ol>
+                            <ol>menu2</ol>
+                            <ol>menu3</ol>
+                            <ol>menu4</ol>
+                            <ol>menu5</ol>
+                        </li>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body ">
+
+
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+    </div>
+
+    <script type="text/javascript">
+        $('.menu-list').hide();
+        
+        $('.menu-icon').click(function () {
+            $(this).hide();
+            $('.menu-list').show();
+            $('.menu-list').animate({
+                width: "100%"
+            }, 1500);
+
+        });
+        $('.menu-list').mouseleave(function () {
+            $('.menu-list').animate({
+                width: "0%"
+            }, 1500, function () {
+                
+                $('.menu-list').hide();
+                $('.menu-icon').show();
+
+            });
+
+
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        /*
+                position
+
+                static
+                relative - 상대적 위치
+                absolute - 정대적 위치
+                fixed - 뷰 포트 안에서 절대적 위치
+                float - ex 백과사전 사진
+
+                슬라이드 햄버거 좌측
+                풀다운메뉴 - 전체
+                각각에 메뉴
+            */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu {
+            width: 19%;
+            display: inline-block;
+            font-size: 30px;
+            height: 50px;
+        }
+
+        .menu-group {
+            position: fixed;
+            width: 100%;
+        }
+
+        .menu-group1 {
+            background: #eee;
+            width: 100%;
+            height: 50px;
+
+        }
+
+        .sub-group {
+            font-size: 20px;
+            width: 19%;
+            display: inline-block;
+            vertical-align: text-top;
+            background: #999;
+            height: 150px;
+            position: absolute;
+
+
+        }
+
+        .content {
+            margin-top: 50px;
+            display: inline-block;
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="menu-group">
+            <div class="menu-group1">
+                <div class="menu menu-1">menu1</div>
+                <div class="menu menu-2">menu2</div>
+                <div class="menu menu-3">menu3</div>
+                <div class="menu menu-4">menu4</div>
+                <div class="menu menu-5">menu5</div>
+            </div>
+            <div class="menu-group2">
+                <div class="sub-group sub-group-1">
+                    <div class="submenu1">menu1-1</div>
+                    <div class="submenu1">menu1-2</div>
+                </div>
+                <div class="sub-group sub-group-2">
+                    <div class="submenu2">menu2-1</div>
+                    <div class="submenu2">menu2-2</div>
+                    <div class="submenu2">menu2-3</div>
+                </div>
+                <div class="sub-group sub-group-3">
+                    <div class="submenu3">menu3-1</div>
+                    <div class="submenu3">menu3-2</div>
+                </div>
+                <div class="sub-group sub-group-4">
+                    <div class="submenu4">menu4-1</div>
+                    <div class="submenu4">menu4-2</div>
+                    <div class="submenu4">menu4-3</div>
+                    <div class="submenu4">menu4-4</div>
+                    <div class="submenu4">menu4-5</div>
+                </div>
+                <div class="sub-group sub-group-5">
+                    <div class="submenu5">menu5-1</div>
+                    <div class="submenu5">menu5-2</div>
+                    <div class="submenu5">menu5-3</div>
+                    <div class="submenu5">menu5-4</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+        <div class="content">content test</div>
+    </div>
+
+    <script type="text/javascript">
+        $('.sub-group').hide();
+        $('.sub-group-1').css("left", "0%");
+        $('.sub-group-2').css("left", "19%");
+        $('.sub-group-3').css("left", "38%");
+        $('.sub-group-4').css("left", "57%");
+        $('.sub-group-5').css("left", "76%");
+
+        $('.menu-1').mouseover(function () {
+            $('.sub-group-1').show();
+        });
+        $('.menu-2').mouseover(function () {
+            $('.sub-group-2').show();
+        });
+        $('.menu-3').mouseover(function () {
+            $('.sub-group-3').show();
+        });
+        $('.menu-4').mouseover(function () {
+            $('.sub-group-4').show();
+        });
+        $('.menu-5').mouseover(function () {
+            $('.sub-group-5').show();
+        });
+
+        $('.sub-group-1').mouseover(function () {
+            $('.sub-group-1').show();
+        });
+        $('.sub-group-2').mouseover(function () {
+            $('.sub-group-2').show();
+        });
+        $('.sub-group-3').mouseover(function () {
+            $('.sub-group-3').show();
+        });
+        $('.sub-group-4').mouseover(function () {
+            $('.sub-group-4').show();
+        });
+        $('.sub-group-5').mouseover(function () {
+            $('.sub-group-5').show();
+        });
+
+        $('.menu-1').mouseout(function () {
+            $('.sub-group-1').hide();
+        });
+        $('.menu-2').mouseout(function () {
+            $('.sub-group-2').hide();
+        });
+        $('.menu-3').mouseout(function () {
+            $('.sub-group-3').hide();
+        });
+        $('.menu-4').mouseout(function () {
+            $('.sub-group-4').hide();
+        });
+        $('.menu-5').mouseout(function () {
+            $('.sub-group-5').hide();
+        });
+
+
+        $('.sub-group-1').mouseout(function () {
+            $('.sub-group-1').hide();
+        });
+        $('.sub-group-2').mouseout(function () {
+            $('.sub-group-2').hide();
+        });
+        $('.sub-group-3').mouseout(function () {
+            $('.sub-group-3').hide();
+        });
+        $('.sub-group-4').mouseout(function () {
+            $('.sub-group-4').hide();
+        });
+        $('.sub-group-5').mouseout(function () {
+            $('.sub-group-5').hide();
+        });
+    </script>
+</body>
+
+</html>

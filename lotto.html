@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Courgette|Noto+Serif+KR" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -12,6 +13,16 @@
         var cur_page = 1;
         var total_page;
         var game_count = 0;
+        var total_money = 0;
+        var plus_money = 0;
+        function sleep(msecs)
+        {
+            var start = new Date().getTime();
+            var cur = start;
+            while(cur - start < msecs){
+                cur = new Date().getTime();
+            }
+        }
         function get_game() {
             lotto_numbers = [];
             cur_page = 1;
@@ -25,28 +36,28 @@
                 // console.log(original_numbers.length);
                 for (i = 0; i < 6; i++) {
                     var number_index = Math.floor((Math.random() * original_numbers.length));
+                    sleep(10);
                     var get_number = original_numbers[number_index];
                     numbers.push(get_number);
                     original_numbers.splice(number_index, 1);
                 }
-                numbers = numbers.sort(function(a,b){return a-b;})
+                numbers.sort(function(a,b){return a-b});
                 lotto_numbers.push(numbers);
             }
             console.log(lotto_numbers);
         };
         // 카드 추가
         function set_cards(page) {
-            total_money = (lotto_numbers.length*1000).toLocaleString();
-
+            
             $('.card').remove();
-            $('.game_money').remove();
-            $('.game_output').append('<div class="card">' +
-                '<h5 class="card-header">총 금액 : '+total_money+'원</h5 >'+
-                '<h5 class="card-header">Lotto</h5>' +
-                '<div class="card-body">' +
-                '<h5 class="card-title"></h5>' +
-                '<p class="card-text"></p>' +
-                '</div>' +
+            $('.game_output').append(
+                '<div class="card">' +
+                    '<h5 class="card-header card_header_title">Play Lotto !</h5>' +
+                    '<div class="card-body">' +
+                        '<h5 class="card-title"></h5>' +
+                        '<p class="card-text"></p>' +
+                    '</div>' +
+                        '<h5 class="card-header total_money">금액 : '+ plus_money +'원</h5 >' +
                 '</div>'
             )
             $('.card-title').append(page + ' page');
@@ -82,7 +93,6 @@
                 $('.game_output .card-text').append(number2);
                 $('.game_output .card-text').append('<br>');
             }
-
             if(cur_page==1 && total_page>1){                
                 $('.btn_next').attr("disabled", false);
                 $('.btn_prev').attr("disabled", true);
@@ -99,8 +109,6 @@
                 $('.btn_next').attr("disabled", false);
                 $('.btn_prev').attr("disabled", false);
             }
-
-
         };
         // 입력
         // game_count = prompt("게임 수를 입력하세요");
@@ -110,52 +118,81 @@
                 if (game_count == 0)
                     return;
                 $('.btn_group').show();
+                // $('.lotto').append('금액 : ' + game_count * 1000 +'원');
                 get_game();
                 if (lotto_numbers.length % 5 == 0)
                     total_page = lotto_numbers.length / 5;
                 else total_page = lotto_numbers.length / 5 + 1;
                 total_page = Math.floor(total_page);
+                total_money = (lotto_numbers.length*1000);
+                plus_money += total_money;                
                 set_cards(cur_page);
             });
             $('.btn_prev').click(function () {
-                if (cur_page > 1) {
+                if (cur_page > 1) 
                     set_cards(--cur_page);
-                }
             });
             $('.btn_next').click(function () {
                 if (cur_page < total_page)
                     set_cards(++cur_page);
+            });
+            $('.finish').click(function(){
+                $('.card').remove();
+                $('.btn_group').hide();
+                plus_money = 0;
             });
         });
 // 처리
     </script>
 
     <style>
+        *{
+            font-family: 'Courgette', cursive;
+        }
+        .total_money{
+            font-family: 'Noto Serif KR', serif;
+        }
+        .title_lotto{
+            margin-top: 30px;
+            font-size: 4em;
+        }
         .lotto {
             text-align: center;
         }
         .game_input {
-            margin: 10px;
+            margin: 30px;
         }
         .game_output {
             width: 40%;
             display: inline;
             text-align: center;
         }
-        .start {
+        .start.finish {
             vertical-align: top;
         }
         .card {
             display: inline-block;
             width: 300px;
-            ;
             height: 380px;
+            position: relative;
+        }
+        .card-title{
+            font-size: 27px;
         }
         .card-header {
             background-color: #ffc5b4;
         }
+        .card_header_title{
+            font-size: 1.8em;
+        }
         .card-text {
             font-size: 25px;
+        }
+        .total_money{
+            position: absolute;
+            width: 299px;
+            top: 87%;
+            
         }
         .btn_group {
             margin: 20px;
@@ -166,16 +203,23 @@
         .form-control {
             display: inline;
             width: 72px;
+            vertical-align: middle;
+            margin-right: 30px;
         }
+        
     </style>
-    <title>Document</title>
+    <title>Lotto</title>
 </head>
 
 <body>
     <div class="lotto">
+        <div class="title_lotto">
+            Lotto
+        </div>
         <div class="game_input">
             <input type="number" class="form-control" min="1" step="1" name="game_count">
             <button type="button" class="btn btn-warning start">Start-Game!</button>
+            <button type="button" class="btn btn-warning finish">Finish-Game!</button>
         </div>
         <div class="game_output">
         </div>
