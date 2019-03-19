@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    회원 목록
+    <div class="list"></div>
+
+    <script type="text/javascript">
+        var query = window.location.search.substr(1);
+        var get_data = query.split("&");
+        console.log(get_data);
+
+        var joinKey = "join";
+        var userList = localStorage.getItem(joinKey);
+        userList = decodeURIComponent(userList);
+        var total = 0;
+        if (userList == "null")
+            var userListJSON = {};
+        else {
+            var userListJSON = JSON.parse(userList);
+
+            for (var user in userListJSON) {
+                total++;
+                userJSON = JSON.parse(userListJSON[user]);
+                for (var key in userJSON) {
+                    console.log(key, userJSON[key]);
+                }
+                $('.list').append('<p>회원 ID : ' + userJSON["inputID"] + '</p>');
+                console.log("\n");
+
+            }
+
+        }
+
+
+        var newUser = {};
+
+        for (var i in get_data) {
+            var data = get_data[i].split("=");
+            var name = data[0];
+            var value = decodeURIComponent(data[1]);
+            newUser[name] = value;
+            console.log(name, value);
+        }
+        $('.list').append('<p>회원 ID : ' + newUser["inputID"] + '</p>');
+
+        userListJSON[total++] = JSON.stringify(newUser);
+        userListJSONString = JSON.stringify(userListJSON);
+        localStorage.setItem(joinKey, userListJSONString);
+
+        $('.list').prepend('<p>회원 수 : ' + total + '</p>');
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    </script>
+</body>
+
+</html>
