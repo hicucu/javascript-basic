@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        var content = {}; //dictionary
+        content['content1'] = 111;
+        content['content2'] = 222;
+        content['content3'] = 333;
+        console.log(content);
+
+        //사전형 변수를 문자열로 형변환하기
+        var content_string = JSON.stringify(content);
+
+        console.log(content_string);
+
+        var content_dict = JSON.parse(content_string);
+        console.log(content_dict);
+
+        //사전형 전체 데이터를 하나씩 꺼내서 처리하기
+        for(var key in content_dict){
+            //해당 사전형 변수에서 하나의 값을 선택하여 꺼내기
+            //$('#'+key).val(content_dict[key]);
+        }
+    </script>
+</body>
+
+</html>

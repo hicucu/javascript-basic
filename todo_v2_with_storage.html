@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script type="text/Javascript">
+        var title="";
+        var content="";
+        var date;        
+        var data;
+        
+        var temp;        
+        var schedule_key = "schedule";
+        var complete_key = "complete";
+        $(document).ready(function(){
+            
+            function SetSchedule(schedule){
+                
+                title=schedule["title"];
+                content=schedule["content"];
+                date=schedule["date"];
+                console.log(title);
+                $('.main .schedule-list').append('<a href="#" class="list-group-item list-group-item-action active"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1 title" id="title" name="title">'+title+'</h5><small class="date" id="date" name="date">'+date+'</small></div><p class="mb-1 content" id="content" name="content">'+content+'</p><button type="button" class="btn btn-light complete">완료</button><button type="button" class="btn btn-success edit">수정</button><button type="button" class="btn btn-secondary cancle">취소</button></a>')
+                $('.schedule-list .btn-secondary').prop('disabled', true);
+            }
+
+            function SetComplete(complete){
+                
+                title=complete["title"];
+                content=complete["content"];
+                date=complete["date"];
+                console.log(title);
+                $('.main .complete-list').append('<a href="#" class="list-group-item list-group-item-action "><div class="d-flex w-100 justify-content-between"><h5 class="mb-1 title" id="title" name="title">'+title+'</h5><small class="date" id="date" name="date">'+date+'</small></div><p class="mb-1 content" id="content" name="content">'+content+'</p><button type="button" class="btn btn-primary complete">완료</button><button type="button" class="btn btn-success edit">수정</button><button type="button" class="btn btn-secondary cancle">취소</button></a>')
+                $('.complete-list .cancle').prop('disabled', false);
+                $('.complete-list .edit').prop('disabled', true);
+                $('.complete-list .complete').prop('disabled', true);
+
+
+                $(this).parent().children(".complete").prop('disabled',true);             
+                $(this).parent().children(".edit").prop('disabled',true);                    
+                $(this).parent().children(".cancle").prop('disabled',false);    
+
+                
+            }
+
+            function loadSchedule(){                
+                var scheduleTotalJSON = localStorage.getItem(schedule_key);
+                
+                scheduleTotalJSON = decodeURIComponent(scheduleTotalJSON);
+                var scheduleTotal = JSON.parse(scheduleTotalJSON);
+
+                for(var totalKey in scheduleTotal){
+                    
+                    var schedule = JSON.parse(scheduleTotal[totalKey]);
+                    SetSchedule(schedule);
+                }
+            }
+
+            function loadComplete(){                
+                var completeTotalJSON = localStorage.getItem(complete_key);
+                
+                completeTotalJSON = decodeURIComponent(completeTotalJSON);
+                var completeTotal = JSON.parse(completeTotalJSON);
+
+                for(var totalKey in completeTotal){
+                    
+                    var complete = JSON.parse(completeTotal[totalKey]);
+                    SetComplete(complete);
+                }
+            }
+
+            function save(){
+                saveSchedule();
+                saveComplete();
+            }
+            function load(){
+                loadComplete();
+                loadSchedule();
+            }
+            function saveComplete(){
+                var completeTotal={};
+                for(i=0; i<$('.complete-list .list-group-item').length; i++){
+                    var complete = {};
+                    complete["title"]=$('.list-group-item')[i].children[0].children[name="title"].innerText;
+                    complete["date"]=$('.list-group-item')[i].children[0].children[name="date"].innerText;
+                    complete["content"]=$('.list-group-item')[i].children[name="content"].innerText;
+                    completeTotal[i] = JSON.stringify(complete);
+                }                    
+                var completeTotalString = JSON.stringify(completeTotal);
+                localStorage.setItem(complete_key, completeTotalString);
+            }
+
+            function saveSchedule(){
+                var scheduleTotal={};
+                for(i=0; i<$('.schedule-list .list-group-item').length; i++){
+                    var schedule = {};
+                    schedule["title"]=$('.list-group-item')[i].children[0].children[name="title"].innerText;
+                    schedule["date"]=$('.list-group-item')[i].children[0].children[name="date"].innerText;
+                    schedule["content"]=$('.list-group-item')[i].children[name="content"].innerText;
+                    scheduleTotal[i] = JSON.stringify(schedule);
+                }                    
+                var scheduleTotalString = JSON.stringify(scheduleTotal);
+                localStorage.setItem(schedule_key, scheduleTotalString);
+            }
+            
+
+            $('.main form').submit(function(e){
+                e.preventDefault();
+                title=($('input[name="title"]').val());
+                content=($('input[name="content"]').val());
+                date=($('input[name="date"]').val());
+
+                $('.main .schedule-list').append('<a href="#" class="list-group-item list-group-item-action active"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1 title" id="title" name="title">'+title+'</h5><small class="date" id="date" name="date">'+date+'</small></div><p class="mb-1 content" id="content" name="content">'+content+'</p><button type="button" class="btn btn-light complete">완료</button><button type="button" class="btn btn-success edit">수정</button><button type="button" class="btn btn-secondary cancle">취소</button></a>')
+                $('.schedule-list .btn-secondary').prop('disabled', true);
+
+                $('.inputArea').val("");
+
+                save();
+            });
+            
+            load();
+            
+                
+
+                /*
+                $('a').on("click", function (e) {
+                    e.preventDefault();
+                    $(this).toggleClass("active");});
+                */
+            $(document).on('click', 'button', function (e) {
+                if($(this).text()=='완료'){
+                    e.preventDefault();                                        
+                    $(this).parent().children(".complete").prop('disabled',true);             
+                    $(this).parent().children(".edit").prop('disabled',true);                    
+                    $(this).parent().children(".cancle").prop('disabled',false);                    
+                    $(this).prop('disabled', true);
+                    $(this).parent().removeClass('active');
+                    $(this).removeClass('btn-light');
+                    $(this).addClass('btn-primary');
+                    $('.main .complete-list').append($(this).parent());
+                    //$(this).parent().remove();
+
+                    save();
+                }
+                if($(this).text()=='취소'){
+                    e.preventDefault();           
+                    $(this).parent().children(".complete").prop('disabled',false);             
+                    $(this).parent().children(".edit").prop('disabled',false);                    
+                    $(this).parent().children(".cancle").prop('disabled',true);                              
+                    $(this).prop('disabled', true);
+                    $(this).parent().addClass('active');
+                                        
+                    $('.main .schedule-list').append($(this).parent());
+                                                 
+                    $('.main .complete').addClass('btn-light');
+                    $('.main .complete').removeClass('btn-primary');
+                    
+                    //$(this).parent().remove();
+                    save();
+                }
+                if($(this).text()=='수정'){
+                    e.preventDefault();             
+                    $('input[name="title"]').val($(this).parent().children('.d-flex').children(".title").text());
+                    $('input[name="date"]').val($(this).parent().children('.d-flex').children(".date").text());
+                    $('input[name="content"]').val($(this).parent().children(".content").text());
+                    
+                    $(this).parent().remove();
+
+                    save();
+                }   
+            });
+
+                /*
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1 title">'+title+'</h5>
+                        <small class="date">'+date+'</small>
+                    </div>
+                    <p class="mb-1 content">'+content+'</p>
+                    <button type="button" class="btn btn-primary complete">완료</button>
+                    <button type="button" class="btn btn-success edit">수정</button>
+                    <button type="button" class="btn btn-secondary cancle">취소</button>
+                </a>
+            */
+            
+            
+        });
+    </script>
+    <style>
+        .main {
+            padding-left: 30%;
+            padding-right: 30%;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!--
+        form : 사용자의 입력받기 위해 사용하는 태그
+        action : 입력받은 내용을 전달할 페이지
+        method : get, post
+    -->
+
+    <div class="wrap">
+        <div class="main">
+            <div class="row">
+                <div class="col-6">할 일</div>
+                <div class="col-6">한 일</div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="list-group schedule-list">
+
+                    </div>
+
+
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="inputTitle">Title</label>
+                            <input type="text" class="form-control inputArea" id="inputTitle" name="title"
+                                placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputContent">Content</label>
+                            <input type="text" class="form-control inputArea" id="inputContent" name="content"
+                                placeholder="Content">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDate">Date</label>
+                            <input type="date" class="form-control inputArea" name="date" id="inputDate">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <div class="list-group complete-list">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
