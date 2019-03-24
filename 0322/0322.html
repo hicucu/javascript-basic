@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Title</title>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <span id="span_test">test</span>
+        <script type="text/javascript">
+        /*
+            var a = document.getElementById('span_test');
+            a.click(function(){}); //
+
+            var b = $('#span_test');
+            b.click(function(){}); //
+
+            var c = $(a);
+            c.click(function(){}); //
+
+*/
+            //일정 스코프 내에서 동작하는 변수 - 지역변수
+            var value = "1";
+
+            // 전역
+            value2 = "2";
+
+            //변수의 지역 문제
+            // 콜백지옥
+            $(function(){
+                var elem = $("<p id='p_test'>test_p</p>");
+                elem.click(function(){alert('p click');});
+                var elem2 = $("<p id='p_test2'>test_p2</p>");
+
+                $('#span_test').append(elem);
+                $('#span_test').append(elem2);
+
+                elem2.click(function(){alert('p2 click')});
+
+
+                var elem3 = $("<p id='p_test3'>test_p3</p>");
+                $(elem3).click(function(){alert('p3 click')});
+                $('#span_test').append(elem3);
+                //$('#p_test3').click(function(){alert('after p3 click')});
+
+                var elem4 = $("<p id='p_test4'>test_p4</p>");
+                7$('#span_test').append(elem4);
+                $(elem4).click(function(){alert('p4 click')});
+                //$('#p_test4').click(function(){alert('after p4 click')});
+                
+                
+
+
+            });
+        </script>
+        
+
+    </body>
+</html>

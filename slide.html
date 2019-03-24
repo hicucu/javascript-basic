@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Slide</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script type="text/javascript">
+
+        $(function () {
+/*
+            $('.right-icon').on("click", function () {
+                $('#body').animate({
+                    "left": "-400px"
+                }, 1500);
+            });
+            $('.left-icon').on("click", function () {
+                $('#body').animate({
+                    "left": "0"
+                }, 1500);
+            });*/
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+            overflow: hidden;
+        }
+
+
+        #wrapped {
+            position: fixed;
+            float: left;
+            position: absolute;
+            left: -200px;
+        }
+
+        #main {
+            background-color: yellow;
+            height: 100vh;
+            display: inline-block;
+            float: left;
+            text-align: center;
+        }
+
+        #left {
+            background-color: blue;
+            width: 200px;
+            height: 100vh;
+            display: inline-block;
+            float: left;
+
+        }
+
+        #right {
+            background-color: green;
+            display: inline-block;
+            width: 200px;
+            height: 100vh;
+            float: left;
+
+        }
+
+        .menu-icon {
+            width: 50px;
+            display: inline-block;
+
+        }
+
+        .wrapped_mid {
+            left: -200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapped">
+        <div id="body">
+            <div id="left"></div>
+            <div id="main">
+                <button class="menu-icon left-icon" src="menu-icon.png" alt="menu"></button>
+                <button class="menu-icon right-icon" src="menu-icon.png" alt="menu"></button>
+                
+            </div>
+            <div id="right"></div>
+        </div>
+    </div>
+
+
+
+
+    <script type="text/javascript">
+
+        document.getElementById("wrapped").style.width = window.innerWidth * 2 + 'px';
+        document.getElementById("main").style.width = window.innerWidth + 'px';
+
+
+        window.onresize = function (event) {
+            document.getElementById("wrapped").style.width = window.innerWidth * 2 + 'px';
+            document.getElementById("main").style.width = window.innerWidth + 'px';
+        }
+        
+        $('.right-icon').click(function () {
+            $('body #wrapped').stop().animate({
+                "left": "-400px"
+            }, 1500);
+        });
+        $('.left-icon').click(function () {
+            $('body #wrapped').stop().animate({
+                "left": "0"
+                }, 1500);
+        });
+                
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

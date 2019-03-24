@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+        .tab-menu {
+            text-align: center;
+        }
+
+        .tab-menu section {
+            padding: 20px 0 0;
+            margin-top: -1px;
+            border-top: 1px solid black;
+        }
+
+
+        .tab-menu label {
+            font-size: 14px;
+            display: inline-block;
+            text-align: center;
+            width: 150px;
+            margin-left: -2px;
+            margin-right: -3px;
+            padding: 10px 0px;
+            border: 1px solid #e8e8e8;
+            border-bottom: 1px solid transparent;
+            color: #888888;
+            background-color: #f6f6f6;
+
+            
+        }
+
+        .tab-menu label:hover {
+            cursor: pointer;
+        }
+        .non-checked:hover{
+            background-color: #f1f1f1;
+            color:black;
+        }
+
+        .tab-menu .checked {
+            color: black;
+            border: 1px solid black;
+            font-weight: 1000;
+            border-bottom: 2px solid white;
+            margin-right: -1px;
+            padding: 14px 0px 12px 0px;
+            background: white;
+        }
+        .tab-menu label span{
+            display: inline-block;
+            margin-left: 10px; 
+            background-color: #333333;
+            width: 15px;
+            line-height: 20px;
+            color: #ffffff;
+            border-radius: 5px;
+
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="tab-menu">
+        <label id="tab2"  class="checked">상품상세정보</label>
+        <label id="tab3" class="non-checked">상품후기 <span>3</span></label>
+        <label id="tab4" class="non-checked">상품후기 <span>9</span></label>
+        <section id="content">
+        </section>
+    </div>
+</body>
+
+</html>
