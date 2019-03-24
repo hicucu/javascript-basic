@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>R EYE 200 BETA TITANIUM</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link href="css/cloud-zoom.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
+    <script type="text/javascript" src="js/cloud-zoom.1.0.2.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0;
+            list-style-type: none;
+            text-align: center;
+            font-family: "Nanum Gothic", sans-serif;
+            color:#333333;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        #category span {
+            font-size: 12px;
+        }
+
+        #wrapped {
+            width: 1376px;
+            display: inline-block;
+
+        }
+
+        .header-content {
+            display: inline-block;
+            border: 0px;
+        }
+
+        #pay-info {
+            width: 40%;
+            float: left;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        #banner {
+            width: 20%;
+        }
+
+        #category {
+            text-align: right;
+        }
+
+        .product-order td {
+            text-align: left;
+        }
+
+        .product-order div {
+            text-align: left;
+        }
+
+        .tickul li {
+            line-height: 24px;
+        }
+
+        /* zoom-section */
+        .zoom-section {
+            clear: both;
+            margin-top: 20px;
+        }
+
+        *html .zoom-section {
+            display: inline;
+            clear: both;
+        }
+
+
+        .zoom-small-image {
+
+            float: left;
+            margin-bottom: 20px;
+        }
+
+        .zoom-tiny-image {
+
+            margin: 0px;
+        }
+
+        .zoom-tiny-image:hover {
+            border: 1px solid #C00;
+        }
+
+        #pay_info {
+            width: 380px;
+        }
+
+        .product-order {
+            width: 100%;
+            margin-left: 10px;
+        }
+
+        .zoom-small-image {
+            border: 0px;
+        }
+
+        #cloud-zoom-big {
+            border: 0px;
+        }
+
+        .small-image-list {
+            text-align: left;
+            display: block;
+            width: 500px;
+        }
+
+        .tab-menu {
+            margin: 50px 0px;
+        }
+
+        .tab-menu label {
+            font-size: 14px;
+            display: inline-block;
+            text-align: center;
+            width: 150px;
+            margin-left: -2px;
+            margin-right: -3px;
+            padding: 10px 0px;
+            border: 1px solid #e8e8e8;
+            border-bottom: 1px solid transparent;
+            color: #888888;
+            background-color: #f6f6f6;
+            margin-bottom: -2px;
+        }
+
+        .tab-menu label:hover {
+            cursor: pointer;
+        }
+
+        .non-checked:hover {
+            background-color: #f1f1f1;
+            color: black;
+        }
+
+        .tab-menu .checked {
+            color: black;
+            border: 1px solid black;
+            font-weight: 1000;
+            border-bottom: 2px solid white;
+            margin-right: -1px;
+            padding: 14px 0px 12px 0px;
+            background: white;
+        }
+
+
+        .tab-section {
+            padding: 20px 0px;
+            border: 1px solid black;
+            border-left: transparent;
+            border-right: transparent;
+            border-top: transparent;
+            width: 960px;
+            height: 119px;
+            display: inline-block;
+            margin-bottom: 100px;
+        }
+
+        .tab-menu label span {
+            display: inline-block;
+            margin-left: 10px;
+            background-color: #333333;
+            width: 15px;
+            line-height: 20px;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+
+        .order-icon {
+            margin: 10px 50px;
+        }
+
+        .cur-price {
+            color: red;
+        }
+
+        .product-order {
+            display: inline-block;
+            width: 500px;
+        }
+
+        .product-order tfoot tr td {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .order-product-name {
+            margin: 0px 0px 10px 0px;
+
+        }
+
+        .tr-order {
+            display: inline-block;
+            width: 500px;
+        }
+
+        .tr-order i {
+            margin-right: 20px;
+        }
+
+        .tr-order .td-title {
+            width: 150px;
+            padding-left: 10px;
+        }
+
+        .select-product {
+            width: 100%;
+        }
+
+
+
+        .select-product-name {
+            padding-left: 20px;
+            width: 70%;
+        }
+
+        .select-product-count {
+            width: 20%;
+        }
+
+        .select-product-price {
+            width: 10%;
+        }
+
+        .product-desc td {
+            font-size: 13px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .tr-line {
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        #totalPrice {
+            text-align: right;
+        }
+
+        #button-box {
+            width: 100%;
+            height: 45px;
+        }
+
+        #button-box a {
+            width: 29%;
+            display: inline-block;
+            height: 100%;
+            padding: 8px;
+            border: 1px solid #dddddd;
+        }
+
+        
+        #button-box #buy-now {
+            width: 39%;
+            display: inline-block;
+            height: 100%;
+            padding: 8px;
+            background-color: #727171;
+            color: white;
+        }
+
+        @media (max-width: 1280px) {
+            #banner {
+                display: none;
+            }
+
+            #wrapped {
+                width: 1280px;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapped">
+        <div id="header">
+            <div id="category">
+                <span><i class="fas fa-home"></i> > PRODUCT > R EYE</span></div>
+            <div class="header-body">
+                <div class="zoom-section">
+                    <div class="zoom-small-image">
+                        <section class="main-img">
+                            <a href="./img/thumbnail/1d6a7858230cf0be29ca74010ae0f865.jpg" class='cloud-zoom' id='zoom1'
+                                rel="adjustX:10, adjustY:-4">
+                                <img src="./img/thumbnail/1d6a7858230cf0be29ca74010ae0f865.jpg" width="550px">
+                            </a>
+                        </section>
+
+                    </div>
+                    <div class="product-desc">
+                        <div class="header-content" id="pay-info">
+                            <table class="product-order">
+                                <thead>
+                                    <tr class="tr-order">
+                                        <td colspan="2">
+                                            <img src="./img/custom_8.gif" class="order-icon">
+                                        </td>
+                                    </tr>
+                                    <tr class="tr-order">
+                                        <td colspan="2">
+                                            <h5>
+                                                <div class="order-product-name"><span style="font-size: 18px">로우로우 베타티타늄
+                                                        안경테 R EYE 200</span></div>
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="tr-order tr-line">
+                                        <td class="td-title"><span><i class="fas fa-angle-right"></i>소비자가</span></td>
+                                        <td id="order-price-before"><span>159,000</span></td>
+                                    </tr>
+                                    <tr class="tr-order">
+                                        <td class="td-title"><i class="fas fa-angle-right"></i><span
+                                                class="cur-price">판매가</span>
+                                        </td>
+                                        <td id="order-price-now" class="cur-price"><span><del>159,000</del></span></td>
+                                    </tr>
+                                    <tr class="tr-order">
+                                        <td class="td-title"><span><i class="fas fa-angle-right"></i>상품요약정보</span></td>
+                                        <td id="order-price-info"><span>159,000</span></td>
+                                    </tr>
+                                    <tr class="tr-order">
+                                        <td class="td-title"><span><i class="fas fa-angle-right"></i>적립금</span></td>
+                                        <td id="order-price-reward"><span>159,000</span></td>
+                                    </tr>
+                                    <tr class="tr-order  tr-line">
+                                        <td class="td-title"><span><i class="fas fa-check"></i>컬러</span></td>
+                                        <td id="order-option">
+                                            <select>
+                                                <option selected><span> - [필수] 옵션을 선택해주세요.</span></option>
+                                                <option><span>------------------</span></option>
+                                                <optgroup label="컬러">
+                                                    <option><span>BLACK</span></option>
+                                                    <option><span>GRAY</span></option>
+                                                    <option><span>GOLD</span></option>
+                                                    <option><span>SILVER</span></option>
+                                                    <option><span>LEOPARD</span></option>
+                                                    <option><span>BLACK&GOLD</span></option>
+                                                </optgroup>
+                                            </select>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2">
+                                            <span>(최소주문수량 1개 이상)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <table class="select-product">
+                                                <thead>
+                                                    <tr class="tr-line" style="background-color: #f9f9f7;">
+                                                        <td class="select-product-name"><span>상품명</span></td>
+                                                        <td class="select-product-count"><span>상품수</span></td>
+                                                        <td class="select-product-price"><span>가격</span></td>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <tfoot>
+                                <div id="totalPrice">
+                                    <strong>총 상품금액</strong>(수량) : <span><strong style="font-size: 25px;">0</strong>
+                                        (0개)</span>
+                                </div>
+                                <div id="button-box">
+                                    <a id="buy-now"> BUY NOW </a>
+                                    <a id="add-to-cart"> ADD TO CART </a>
+                                    <a id="wish-list"> WISH LIST</a>
+                                </div>
+                            </tfoot>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-content" id="banner">
+                    <img src="./img/banner/180905_side_rtrunk_fin.jpg">
+                </div>
+            </div>
+            <div class="small-image-list" style="width: 550px;">
+                <a href='./img/thumbnail/5c4caaeffebeb70f4d4aa85f1a88fd32.jpg' class='cloud-zoom-gallery' title='Red'
+                    rel="useZoom: 'zoom1', smallImage: './img/thumbnail/5c4caaeffebeb70f4d4aa85f1a88fd32.jpg' ">
+                    <img class="zoom-tiny-image" src="./img/thumbnail/5c4caaeffebeb70f4d4aa85f1a88fd32.jpg"
+                        width="18%"></a>
+                <a href='./img/thumbnail/6797cb83fc5366cfed34ced0d7c421a6.jpg' class='cloud-zoom-gallery' title='Red'
+                    rel="useZoom: 'zoom1', smallImage: './img/thumbnail/6797cb83fc5366cfed34ced0d7c421a6.jpg' ">
+                    <img class="zoom-tiny-image" src="./img/thumbnail/6797cb83fc5366cfed34ced0d7c421a6.jpg"
+                        width="18%"></a>
+                <a href='./img/thumbnail/7f5bbe6b0d38beba36f66c69134e1c6f.jpg' class='cloud-zoom-gallery' title='Red'
+                    rel="useZoom: 'zoom1', smallImage: './img/thumbnail/7f5bbe6b0d38beba36f66c69134e1c6f.jpg' ">
+                    <img class="zoom-tiny-image" src="./img/thumbnail/7f5bbe6b0d38beba36f66c69134e1c6f.jpg"
+                        width="18%"></a>
+                <a href='./img/thumbnail/905983dbc15010a1505c42568f3e1300.jpg' class='cloud-zoom-gallery' title='Red'
+                    rel="useZoom: 'zoom1', smallImage: './img/thumbnail/905983dbc15010a1505c42568f3e1300.jpg' ">
+                    <img class="zoom-tiny-image" src="./img/thumbnail/905983dbc15010a1505c42568f3e1300.jpg"
+                        width="18%"></a>
+                <a href='./img/thumbnail/cb56d6ed617bf3786f6dac1f1a06d7df.jpg' class='cloud-zoom-gallery' title='Red'
+                    rel="useZoom: 'zoom1', smallImage: './img/thumbnail/cb56d6ed617bf3786f6dac1f1a06d7df.jpg' ">
+                    <img class="zoom-tiny-image" src="./img/thumbnail/cb56d6ed617bf3786f6dac1f1a06d7df.jpg"
+                        width="18%"></a>
+            </div>
+        </div>
+        <div id="main">
+            <section class="tab-section">
+                <div class="tab-menu">
+                    <label id="tab2" class="checked">상품상세정보</label>
+                    <label id="tab3" class="non-checked">상품후기 <span>3</span></label>
+                    <label id="tab4" class="non-checked">상품후기 <span>9</span></label>
+                </div>
+            </section>
+            <div id="product-info">
+                <img src="./img/01_service_banner_shop1_131641.jpg" class="product-img">
+                <img src="./img/02_service_banner_shop1_131641.jpg" class="product-img">
+                <img src="./img/1.-intro_shop1_164113.jpg" class="product-img">
+                <img src="./img/2.-model-cut_RGL200_shop1_164134.jpg" class="product-img">
+                <img src="./img/3.-about-REYE_shop1_164134.jpg" class="product-img">
+                <img src="./img/4.-size_shop1_164134.jpg" class="product-img">
+                <img src="./img/200_GRAY.gif" class="product-img">
+                <img src="./img/5.-feature_shop1_164135.jpg" class="product-img">
+                <img src="./img/6.-RGL200_shop1_164137.jpg" class="product-img">
+                <img src="./img/7.-R-EYE-200_color_shop1_164137.jpg" class="product-img">
+                <img src="./img/8.-fit-guide_shop1_164137.jpg" class="product-img">
+                <img src="./img/copy-1551342795-9.q_a.jpg" class="product-img">
+                <img src="./img/copy-1551342807-10.stockist.jpg" class="product-img">
+                <img src="./img/09_DELIVERY.jpg" class="product-img">
+                <img src="./img/review_service.jpg" class="product-img">
+                <img src="./img/R-TRUNK_small_banner.jpg" class="product-img">
+
+
+            </div>
+            <div id="product-review">
+                <section class="tab-section">
+                    <div class="tab-menu">
+                        <label id="tab2" class="non-checked">상품상세정보</label>
+                        <label id="tab3" class="checked">상품후기 <span>3</span></label>
+                        <label id="tab4" class="non-checked">상품후기 <span>9</span></label>
+                    </div>
+                </section>
+            </div>
+            <div id="product-QnA">
+                <section class="tab-section">
+                    <div class="tab-menu">
+                        <label id="tab2" class="non-checked">상품상세정보</label>
+                        <label id="tab3" class="non-checked">상품후기 <span>3</span></label>
+                        <label id="tab4" class="checked">상품후기 <span>9</span></label>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
